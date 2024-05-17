@@ -1,0 +1,39 @@
+﻿@page "/"
+
+<PageTitle>Home</PageTitle>
+<a href="tab">home</a>
+
+
+@* Wichtig: NICHT blazor.syncfusion nuget herunterladen -> 
+-> blazor.syncfusion.core .navigation und .theme werden für Tabs benötigt *@
+
+<div style="width: 300px">
+	<QscTabContainer name="RGC001" tabs="DSTAB1;DSTAB2;DSTAB3">
+		<QscTabItem Header="Tab1" name="DSTAB1">
+			<h3>text tab1</h3>
+		</QscTabItem>
+		<QscTabItem Header="Tab2" name="DSTAB2">
+			<h3>text tab2</h3>
+		</QscTabItem>
+		<QscTabItem Header="Tab3" name="DSTAB3">
+			<h3>text tab3</h3>
+		</QscTabItem>
+	</QscTabContainer>
+
+
+	<QscTabContainer name="RGC002" tabs="02DSTAB1;02DSTAB2;02DSTAB3">
+		<QscTabItem Header="02Tab1" name="02DSTAB1">
+			<h3>text tab1</h3>
+		</QscTabItem>
+		<QscTabItem Header="02Tab2" name="02DSTAB2">
+			<h3>text tab2</h3>
+		</QscTabItem>
+		<QscTabItem Header="02Tab3" name="02DSTAB3">
+			<h3>text tab3</h3>
+		</QscTabItem>
+	</QscTabContainer>
+</div>
+
+<Component1></Component1>
+
+<a href="interactive">/interactive</a>

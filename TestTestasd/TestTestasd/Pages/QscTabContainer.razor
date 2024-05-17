@@ -1,0 +1,179 @@
+﻿@inject IJSRuntime JSRuntime
+
+<SfTab LoadOn="ContentLoad.Demand" @bind-SelectedItem="SelectedTabIndex">
+    <TabEvents Selected="OnTabSelected"></TabEvents>
+    <TabAnimationSettings>
+        <TabAnimationPrevious Effect="@SwitchTabAnimation"></TabAnimationPrevious>
+        <TabAnimationNext Effect="@SwitchTabAnimation"></TabAnimationNext>
+    </TabAnimationSettings>
+    <TabItems>
+        @ChildContent
+    </TabItems>
+</SfTab>
+
+@SelectedTabIndex
+
+@HeaderText
+
+@if (TabDict.Count > 0)
+{
+    <p>Dict:</p>
+    @foreach (var t in TabDict)
+    {
+        <p>@t.Key @t.Value</p>
+    }
+}
+@code{
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }    
+
+    [Parameter]
+    public string name { get; set; }
+
+    [Parameter]
+    public string tabs { get; set; }
+
+
+    public AnimationEffect SwitchTabAnimation = AnimationEffect.None;
+
+
+    int SelectedTabIndex;
+
+    string? SelectedTabName = null;
+
+    public string HeaderText;
+
+    public Dictionary<int, string> TabDict = new();
+
+    public List<string> tabList = new();
+
+    public string TabOrder = "DSTAB1;DSTAB3;DSTAB2";
+
+    protected override async Task OnInitializedAsync()
+    {
+        var storedTabIndex = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "tabIndex");
+
+        if (!string.IsNullOrEmpty(storedTabIndex))
+        {
+            SelectedTabIndex = int.Parse(storedTabIndex);
+        }
+
+        tabList = TabsToList();
+
+        CreateTabDict();
+
+        SelectedTabIndex = GetIndexWithName(SelectedTabName);
+
+        SetHeaderText();
+
+    }
+
+
+    public void OnTabSelected(SelectEventArgs args)
+    {
+        // Console.WriteLine("Von: " + args.PreviousIndex);
+        // Console.WriteLine("Zu: " + args.SelectedIndex);
+        // Console.WriteLine("Name: " + name);
+
+        // Console.WriteLine(args.IsInteracted ? "Tab Item selected by user interaction" : "Tab Item selected by programmatically");
+
+        JSRuntime.InvokeVoidAsync("localStorage.setItem", "tabIndex", args.SelectedIndex.ToString());
+
+        SetHeaderText();
+
+        // ItemMatch(args.SelectedIndex);
+
+    }
+
+
+
+    void CreateTabDict()
+    {
+        if (tabList.Count > 0)
+        {
+            TabDict = new();
+
+            for (int i = 0; i < tabList.Count; i++)
+            {
+                TabDict.Add(i, tabList[i]);
+
+                // Console.WriteLine("===================");
+                // Console.WriteLine("Key: " + i + "; Value: " + tabList[i]);
+                // ItemMatch(i);
+
+            }
+
+            if (TabDict.Count < 1)
+            {
+                Console.WriteLine("Keine Tabs gefunden");
+            }
+
+            // if(TabOrder != "" || TabOrder != null)
+            // {
+            //     // fetter bullshit
+            //     TabDict = SortDictionaryByListOrder(TabDict, ParseSortedTabOrder());
+
+            //     TabDict = SortTabsByKey();
+
+            //     Console.WriteLine("--------Sorted--------");
+            //     foreach (var pair in TabDict)
+            //     {
+            //         Console.WriteLine("{0}: {1}", pair.Key, pair.Value);
+            //     }
+            // }
+        }
+    }
+
+
+    void SetHeaderText()
+    {
+        if (TabDict.Count > 0)
+        {
+            HeaderText = TabDict[SelectedTabIndex];
+        }
+    }
+
+
+    void ItemMatch(int i)
+    {
+        if (TabDict[i] == SelectedTabName)
+        {
+            Console.WriteLine("MATCH!!");
+        }
+    }
+
+
+    public int GetIndexWithName(string name)
+    {
+        if (TabDict.Count > 0)
+        {
+            return TabDict.FirstOrDefault(x => x.Value == name).Key;
+        }
+
+        return 0;
+    }
+
+    // Sortierversuche
+    // -- ist aber unnötig, da man die Tab-Reihenfolge im UI nicht ändern kann
+
+    Dictionary<int, string> SortTabsByKey()
+    {
+        return TabDict.OrderBy(pair => pair.Value).ToDictionary(pair => pair.Key, pair => pair.Value);
+    }
+
+    List<string> TabsToList()
+    {
+        return tabs.Split(';').ToList();
+    }
+
+    // List<string> ParseSortedTabOrder()
+    // {
+    //     return TabOrder.Split(';').ToList();
+    // }
+
+    // static Dictionary<int, string> SortDictionaryByListOrder(Dictionary<int, string> dictionary, List<string> sortOrder)
+    // {
+    //     var sortedPairs = dictionary.OrderBy(kvp => sortOrder.IndexOf(kvp.Value));
+    //     return sortedPairs.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+    // }
+}

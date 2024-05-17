@@ -1,0 +1,23 @@
+﻿
+<div class="test" style="color: green;">
+    <TabItem>
+        <ContentTemplate>
+            @ChildContent
+        </ContentTemplate>
+        <ChildContent>
+            <TabHeader Text="@Header"></TabHeader>
+        </ChildContent>
+    </TabItem>
+</div>
+
+
+@code{
+    [Parameter]
+    public string? Header { get; set; }
+
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    [Parameter]
+    public string name { get; set; }
+}
