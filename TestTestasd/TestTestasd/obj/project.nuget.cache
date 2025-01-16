@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "c54FJfkaxapsTrCWDcPXPJjxY3HSb0TUhl4sqSKV7xRFr94z1Ni7cxbZigZzDyIMHOPdbafJVh1mwS3j2/llbw==",
+  "dgSpecHash": "SOFp3xACJ1tyXsMBM+PAbS5c6yaGLtP9+gV7qR7LTQnpzwzeFRN3EOltGhlp68mR5Qo93igZ34Z+SUljIjAG4Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\flori\\Downloads\\TestTestasd\\TestTestasd\\TestTestasd.csproj",
+  "projectFilePath": "C:\\Users\\flori\\repos\\QSCtest\\TestTestasd\\TestTestasd\\TestTestasd.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\flori\\.nuget\\packages\\microsoft.aspnetcore.authorization\\8.0.0\\microsoft.aspnetcore.authorization.8.0.0.nupkg.sha512",
     "C:\\Users\\flori\\.nuget\\packages\\microsoft.aspnetcore.components\\8.0.0\\microsoft.aspnetcore.components.8.0.0.nupkg.sha512",

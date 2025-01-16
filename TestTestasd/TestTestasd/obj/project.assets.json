@@ -3031,11 +3031,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\flori\\Downloads\\TestTestasd\\TestTestasd\\TestTestasd.csproj",
+      "projectUniqueName": "C:\\Users\\flori\\repos\\QSCtest\\TestTestasd\\TestTestasd\\TestTestasd.csproj",
       "projectName": "TestTestasd",
-      "projectPath": "C:\\Users\\flori\\Downloads\\TestTestasd\\TestTestasd\\TestTestasd.csproj",
+      "projectPath": "C:\\Users\\flori\\repos\\QSCtest\\TestTestasd\\TestTestasd\\TestTestasd.csproj",
       "packagesPath": "C:\\Users\\flori\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\flori\\Downloads\\TestTestasd\\TestTestasd\\obj\\",
+      "outputPath": "C:\\Users\\flori\\repos\\QSCtest\\TestTestasd\\TestTestasd\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\flori\\AppData\\Roaming\\NuGet\\NuGet.Config"
